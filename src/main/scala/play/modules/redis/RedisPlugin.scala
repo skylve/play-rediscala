@@ -45,8 +45,6 @@ object RedisPlugin {
     app.plugin[RedisPlugin]
       .getOrElse(throw new PlayException("RedisPlugin Error", "RedisPlugin has not been initialized! Please edit your conf/play.plugins file and add the following line: '200:play.modules.redis.RedisPlugin'."))
 
-  private[this] def retrieveClient[A](db: String, c: Map[String, A]): A = c.getOrElse(db, throw new PlayException("RedisPlugin Error", s"Could not access redis '$db'"))
-
   def apply(db: String = "default")(implicit app: Application): RedisCommands = current.apply(db)
 
   def client(db: String = "default")(implicit app: Application): RedisClient = current.client(db)

@@ -1,6 +1,6 @@
 language: scala
 
-script: "sbt clean coveralls"
+script: "sbt coveralls"
 
 services:
   - redis-server

@@ -2,6 +2,9 @@ language: scala
 
 script: "sbt clean coveralls"
 
+services:
+  - redis-server
+
 scala:
    - 2.11.2
 

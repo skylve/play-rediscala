@@ -69,21 +69,23 @@ private[redis] case class RedisClients(
 }
 
 private[redis] object RedisClients {
+  val DEFAULT_PORT = 6379
+
   def parseServerCfg(cfg: Configuration): RedisServer = {
     val uri = cfg.getString("uri").flatMap(x => Try(new URI(x)).toOption)
     val simpleUri = cfg.getString("uri").flatMap(parseSimpleURIOpt)
     val host = uri.flatMap(x => Option(x.getHost)).orElse(simpleUri.map(_._1)).orElse(cfg.getString("host"))
-    val port = uri.map(_.getPort).filter(_ > 0).orElse(simpleUri.map(_._2)).orElse(cfg.getInt("port"))
+    val port = uri.map(_.getPort).filter(_ > 0).orElse(simpleUri.map(_._2)).orElse(cfg.getInt("port")).getOrElse(DEFAULT_PORT)
     val password = uri.flatMap(x => Option(x.getUserInfo)).flatMap(parseUserInfo).orElse(simpleUri.flatMap(_._3)).orElse(cfg.getString("password"))
     val db = cfg.getInt("db")
-    if (host.isEmpty || port.isEmpty)
-      throw new PlayException("RedisPlugin Error", "Missing host or port")
-    RedisServer(host.get, port.get, password, db)
+    if (host.isEmpty)
+      throw new PlayException("RedisPlugin Error", "Missing host")
+    RedisServer(host.get, port, password, db)
   }
 
   def parseServer(server: String): Option[(String, Int)] = server.split(":").toList match {
     case host :: port :: Nil => Some((host, port.toInt))
-    case host :: Nil => Some((host, 6379))
+    case host :: Nil => Some((host, DEFAULT_PORT))
     case _ => None
   }
 

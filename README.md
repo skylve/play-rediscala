@@ -76,10 +76,10 @@ redis {
 ### Client type
 
 Rediscala offer different client types : 
-    [RedisClient](http://etaty.github.io/rediscala/latest/api/index.html#redis.RedisClient)
-    [RedisClientPool](http://etaty.github.io/rediscala/latest/api/index.html#redis.RedisClientPool)
-    [RedisClientMasterSlaves](http://etaty.github.io/rediscala/latest/api/index.html#redis.RedisClientMasterSlaves)
-    [SentinelMonitoredRedisClient](http://etaty.github.io/rediscala/latest/api/index.html#redis.SentinelMonitoredRedisClient)
+  * [RedisClient](http://etaty.github.io/rediscala/latest/api/index.html#redis.RedisClient)
+  * [RedisClientPool](http://etaty.github.io/rediscala/latest/api/index.html#redis.RedisClientPool)
+  * [RedisClientMasterSlaves](http://etaty.github.io/rediscala/latest/api/index.html#redis.RedisClientMasterSlaves)
+  * [SentinelMonitoredRedisClient](http://etaty.github.io/rediscala/latest/api/index.html#redis.SentinelMonitoredRedisClient)
 
 If you want to configure a db to use a specific client type you can add `type` parameter as so :
 

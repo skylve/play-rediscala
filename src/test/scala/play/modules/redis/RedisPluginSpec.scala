@@ -1,6 +1,6 @@
 package play.modules.redis
 
-import com.typesafe.config.{ConfigFactory}
+import com.typesafe.config.ConfigFactory
 import org.scalatest._
 import play.api.{PlayException, Configuration}
 import redis.RedisServer
@@ -182,7 +182,7 @@ class RedisPluginSpec extends FunSpec with Matchers {
 
       it("fail to load the plugin without a proper configuration") {
         an [PlayException] should be thrownBy running(FakeApplication(additionalPlugins = Seq("play.modules.redis.RedisPlugin"))) {
-          fail
+          fail()
         }
       }
 
